@@ -1,6 +1,5 @@
 import React from "react";
 import { getFromStorage, setInStorage } from "../../utils/storage";
-import { json } from "body-parser";
 import "whatwg-fetch";
 import "./Home.scss";
 
@@ -8,7 +7,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isLoading: false,
       token: "",
       signUpErr: "",
       signInErr: "",
@@ -30,15 +29,15 @@ class Home extends React.Component {
         .then((json) => {
           if (json.success) {
             this.setState({
-              token,
+              token: token,
+              isLoading: false,
+            });
+          } else {
+            this.setState({
               isLoading: false,
             });
           }
         });
-    } else {
-      this.setState({
-        isLoading: false,
-      });
     }
   }
 
@@ -142,6 +141,7 @@ class Home extends React.Component {
         .then((res) => res.json())
         .then((json) => {
           if (json.success) {
+            setInStorage("login_app", { token: "" });
             this.setState({
               token: "",
               isLoading: false,
