@@ -7,7 +7,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
+      isLoading: true,
       token: "",
       signUpErr: "",
       signInErr: "",
@@ -38,6 +38,10 @@ class Home extends React.Component {
             });
           }
         });
+    } else {
+      this.setState({
+        isLoading: false,
+      });
     }
   }
 
@@ -181,10 +185,6 @@ class Home extends React.Component {
         <div>
           <div>
             <form>
-              <div className="imgcontainer">
-                <img src="img_avatar2.png" alt="Avatar" className="avatar" />
-              </div>
-
               <div className="container">
                 <h1>Sign Up</h1>
                 <div>{signUpErr ? <p>{signUpErr}</p> : null} </div>
@@ -226,7 +226,7 @@ class Home extends React.Component {
                 />
 
                 <button onClick={(e) => this.onSignUp(e)} type="submit">
-                  Login
+                  Sign Up
                 </button>
                 <label>
                   <input type="checkbox" name="remember" /> Remember me
@@ -245,10 +245,6 @@ class Home extends React.Component {
           </div>
           <div>
             <form>
-              <div className="imgcontainer">
-                <img src="img_avatar2.png" alt="Avatar" className="avatar" />
-              </div>
-
               <div className="container">
                 <h1>Sign In</h1>
                 <div>{signInErr ? <p>{signInErr}</p> : null} </div>
@@ -277,7 +273,7 @@ class Home extends React.Component {
                 />
 
                 <button onClick={(e) => this.onSignIn(e)} type="submit">
-                  Login
+                  Sign In
                 </button>
                 <label>
                   <input type="checkbox" name="remember" /> Remember me
